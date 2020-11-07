@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:mypages="clr-namespace:SportsNewsApp.Models.Sites;assembly=SportsNewsApp"
+            mc:Ignorable="d"
+            x:Name="masterPage"
+            x:Class="SportsNewsApp.MainPage" BarBackgroundColor="#616161" BarTextColor="black" SelectedTabColor="white" UnselectedTabColor="black" >
+    <TabbedPage.Title>helllllo</TabbedPage.Title>
+    <TabbedPage.Children>
+        <ContentPage IconImageSource="news.png">
+            <ListView x:Name="listView" ItemsSource="{Binding PartialArticles}" RowHeight="170" IsPullToRefreshEnabled="True" Refreshing="ViewList_Loading">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HasShadow="True" Margin="10,5,10,5" Padding="10,0,0,0" BorderColor="LightGray" CornerRadius="20">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Frame Grid.RowSpan="3" Padding="0" Margin="0" CornerRadius="20" Grid.Column="1" HasShadow="True">
+                                        <Image Source="{Binding Image}" Aspect="AspectFill" IsAnimationPlaying="True"/>
+                                    </Frame>
+                                    <Frame Grid.Column="1" Grid.Row="0" Padding="0" Grid.RowSpan="2"  HorizontalOptions="End" Opacity="0.6" VerticalOptions="Start" WidthRequest="40" HeightRequest="40" CornerRadius="40" Margin="0,5,5,10">
+                                        <Image Source="{Binding Icon}"  Aspect="AspectFill"/>
+                                    </Frame>
+                                    <FlexLayout Direction="Column" >
+                                        <Label  Text="{Binding Title}" FontAttributes="Bold" TextColor="Black" Margin="0,5,0,0" FlowDirection="RightToLeft" HorizontalOptions="Start" FontSize="13" MaxLines="3" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="1" VerticalOptions="Fill" Text="{Binding Subtitle}" MaxLines="3" FontSize="13" LineBreakMode="TailTruncation"/>
+                                    </FlexLayout>
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ImageButton  x:Name="shareButton" Source="shareIcon2.png" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="Share_Click"/>
+                                        <Label Grid.Column="1" Text="{Binding AuthorAndDate}" FontSize="10" HorizontalOptions="EndAndExpand"  FlowDirection="RightToLeft"/>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Button Text="Load morde" Clicked="Load_Articles" TextColor="White" BackgroundColor="LightSlateGray" AbsoluteLayout.LayoutBounds=".5,1,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" />
+                </ListView.Footer>
+            </ListView>
+        </ContentPage>
+        <mypages:HighlightsPage IconImageSource="highlights.png" />
+    </TabbedPage.Children>
+    
+</TabbedPage>
